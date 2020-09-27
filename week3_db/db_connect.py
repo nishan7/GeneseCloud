@@ -13,11 +13,13 @@ class Database:
 
 
     def get_all_data(self):
+        # Get all the data from the tables
         self.cursor.execute('select * from tasks')
         data = self.cursor.fetchall()
         return data
 
     def push_data(self, name):
+        # Insert a data into the table
         sql = "INSERT INTO tasks (name) VALUES (%s)"
         val = name
         self.cursor.execute(sql, val)
@@ -29,11 +31,13 @@ class Database:
         return data
 
     def set_task_done(self, id):
+        # Set at task(id) as completed
         sql = "UPDATE tasks SET done=TRUE where id={}".format(id)
         self.cursor.execute(sql)
         self.conn.commit()
 
     def delete_task(self, id):
+        # Delete a task from table(id)
         sql = "DELETE FROM tasks WHERE id={} ".format(id)
         self.cursor.execute(sql)
         self.conn.commit()
